@@ -19,6 +19,10 @@ For this application, I built off of starter code to enable a fitness tracker.  
 * [Git](https://git-scm.com/) 
 * [GitHub](github.com)
 
+## Deployed Link
+
+[Access the App Here](https://fast-shore-48366.herokuapp.com/)
+
 ## Author
 
 * Kiri Smith 
