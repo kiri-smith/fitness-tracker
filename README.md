@@ -4,7 +4,7 @@ For this application, I built off of starter code to enable a fitness tracker.  
 
 ## Snapshot
 
-<img src="assets\Snip1.JPG" alt="Screenshot of Fitness Tracker Application">
+<img src="assets\Snip.JPG" alt="Screenshot of Fitness Tracker Application">
 
 ## Built With
 
