@@ -22,9 +22,7 @@ function generatePalette() {
 }
 
 function populateChart(data) {
-  console.log(data);
   let durations = calculateDuration(data);
-  console.log(durations);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
   const colors = generatePalette();
@@ -52,15 +50,7 @@ function populateChart(data) {
   let lineChart = new Chart(line, {
     type: 'line',
     data: {
-      labels: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
+      labels,
       datasets: [
         {
           label: 'Workout Duration In Minutes',
@@ -100,15 +90,7 @@ function populateChart(data) {
   let barChart = new Chart(bar, {
     type: 'bar',
     data: {
-      labels: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
+      labels,
       datasets: [
         {
           label: 'Pounds',
@@ -192,22 +174,17 @@ function populateChart(data) {
 }
 
 function calculateTotalWeight(data) {
-  let totals = [];
+  let pounds = [];
 
   data.forEach((workout) => {
-    const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
-      if (type === 'resistance') {
-        return total + weight;
-      } else {
-        return total;
-      }
-    }, 0);
-
-    totals.push(workoutTotal);
+    workout.exercises.forEach((exercise) => {
+      pounds.push(exercise.weight);
+    });
   });
 
-  return totals;
+  return pounds;
 }
+
 
 
 function calculateDuration(data) {
@@ -215,7 +192,6 @@ function calculateDuration(data) {
 
   data.forEach((workout) => {
     workout.exercises.forEach((exercise) => {
-      console.log(exercise);
       durations.push(exercise.duration);
     });
   });
@@ -231,9 +207,10 @@ function workoutNames(data) {
     });
   });
 
+
   // return de-duplicated array with JavaScript `Set` object
   return [...new Set(workouts)];
-}
+};
 
 // get all workout data from back-end
 API.getWorkoutsInRange().then(populateChart);
