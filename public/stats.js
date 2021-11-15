@@ -22,7 +22,9 @@ function generatePalette() {
 }
 
 function populateChart(data) {
-  let durations = data.map(({ totalDuration }) => totalDuration);
+  console.log(data);
+  let durations = calculateDuration(data);
+  console.log(durations);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
   const colors = generatePalette();
@@ -50,7 +52,15 @@ function populateChart(data) {
   let lineChart = new Chart(line, {
     type: 'line',
     data: {
-      labels,
+      labels: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
       datasets: [
         {
           label: 'Workout Duration In Minutes',
@@ -80,8 +90,8 @@ function populateChart(data) {
             display: true,
             scaleLabel: {
               display: true,
-            },
-          },
+            }
+          }
         ],
       },
     },
@@ -90,7 +100,15 @@ function populateChart(data) {
   let barChart = new Chart(bar, {
     type: 'bar',
     data: {
-      labels,
+      labels: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
       datasets: [
         {
           label: 'Pounds',
@@ -190,6 +208,19 @@ function calculateTotalWeight(data) {
 
   return totals;
 }
+
+
+function calculateDuration(data) {
+  let durations = [];
+
+  data.forEach((workout) => {
+    workout.exercises.forEach((exercise) => {
+      console.log(exercise);
+      durations.push(exercise.duration);
+    });
+  });
+  return durations;
+};
 
 function workoutNames(data) {
   let workouts = [];
